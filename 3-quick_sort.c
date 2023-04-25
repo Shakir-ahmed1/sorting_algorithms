@@ -1,9 +1,12 @@
 #include "sort.h"
 #include <stdio.h>
 /**
- * quick_sort - divide and conqeur sorting algorithm
+ * partition - it sorts using Lomuto partition schemem
  * @array: unsorted array of integers
  * @size: the size of the array
+ * @low: the intial index for the sub-array
+ * @high: the highest index for the sub-array
+ * Return: the with a new pivot
  */
 long int partition(int *array, long int size, long int low, long int high)
 {
@@ -20,7 +23,7 @@ long int partition(int *array, long int size, long int low, long int high)
 				temp = array[i];
 				array[i] = array[j];
 				array[j] = temp;
-				print_array(array,size);
+				print_array(array, size);
 			}
 			i++;
 		}
@@ -32,9 +35,16 @@ long int partition(int *array, long int size, long int low, long int high)
 		array[high] = temp;
 		print_array(array, size);
 	}
-	return i;
+	return (i);
 
 }
+/**
+ * quick - a recursive version of the quick sort
+ * @array: unsorted array of integers
+ * @size: the size of the array
+ * @low: the intial index for the sub-array
+ * @high: the highest index for the sub-array
+ */
 void quick(int *array, long int size, long int low, long int high)
 {
 	long int p;
@@ -45,9 +55,14 @@ void quick(int *array, long int size, long int low, long int high)
 	quick(array, size, low, p - 1);
 	quick(array, size, p + 1, high);
 }
+/**
+ * quick_sort - divide and conqeur sorting algorithm
+ * @array: unsorted array of integers
+ * @size: the size of the array
+ */
 void quick_sort(int *array, size_t size)
 {
 	if (!array || size < 2)
 		return;
-	quick(array, size, 0, size -1);
+	quick(array, size, 0, size - 1);
 }
